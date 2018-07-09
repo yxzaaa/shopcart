@@ -10,19 +10,23 @@ class Cart extends React.Component{
             products:[
                 {
                     src:pan,
-                    name:'Wyze cam'
+                    name:'Wyze cam',
+                    price:'12.99'
                 },
                 {
                     src:page,
-                    name:'Wyze cam'
+                    name:'Wyze cam',
+                    price:'12.99'
                 },
                 {
                     src:dsc,
-                    name:'Wyze cam'
+                    name:'Wyze cam',
+                    price:'12.99'
                 },
                 {
                     src:card,
-                    name:'Wyze cam'
+                    name:'Wyze cam',
+                    price:'12.99'
                 }
             ],
             isOpen:false
@@ -45,6 +49,7 @@ class Cart extends React.Component{
                     <img src={item.src} alt=''/>
                 </div>
                 <div className='cart-title'>{item.name}</div>
+                <div className='cart-price'>${item.price}</div>
                 <div className='go-buy'>BUY</div>
             </li>
         ))
