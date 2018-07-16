@@ -1,5 +1,7 @@
 import React from 'react';
+// 购物车组件
 class Cart extends React.Component{
+    // 在组件构造函数中初始化数据
     constructor(props){
         super(props);
         this.state = {
@@ -7,16 +9,20 @@ class Cart extends React.Component{
             isOpen:false
         }
     }
+    //定义页面操作所需要用到的方法
+    //关闭购物车方法
     closeCart(){
         this.setState({
             isOpen:false
         })
     }
+    //打开购物车方法
     openCart(){
         this.setState({
             isOpen:true
         })
     }
+    //刷新购物车数据
     refreshList(){
         fetch('http://localhost:8081/php1/cart.php?kind=select',{
             method:'GET',
@@ -32,6 +38,7 @@ class Cart extends React.Component{
             console.log(err);
         })
     }
+    //减少商品数量
     down(cid,index){
         var carts = this.state.carts;
         if(carts[index].count>1){
@@ -50,6 +57,7 @@ class Cart extends React.Component{
             })
         }
     }
+    //增加商品数量
     up(cid,index){
         var carts = this.state.carts;
         carts[index].count ++; 
@@ -66,6 +74,7 @@ class Cart extends React.Component{
             console.log(err);
         })
     }
+    //删除购物车中指定商品
     delete(cid){
         fetch('http://localhost:8081/php1/cart.php?kind=delete&cid='+cid,{
             method:'GET',
@@ -81,6 +90,7 @@ class Cart extends React.Component{
     yes(){
         alert("buy success!");
     }
+    //组件加载完成后，刷新列表
     componentDidMount(){
         this.refreshList();
     }
@@ -101,6 +111,7 @@ class Cart extends React.Component{
                 <div className='remove' onClick={()=>this.delete(item.cid)}>DELETE</div>
             </li>
         ))
+        //通过数据isOpen的状态判断组件需要渲染的内容，来控制组件的显示和隐藏
         if(this.state.isOpen === true){
             return <div className='cart-box'>
                 <div>CART</div>

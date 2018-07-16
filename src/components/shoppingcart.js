@@ -3,7 +3,7 @@ import Banner from './banner.js';
 import ProductList from './productlist.js';
 import Cart from './cart.js';
 import cartIcon from '../assets/img/cart.jpg';
-
+// 购物车父组件
 class ShoppingCart extends React.Component{
     constructor(props){
         super(props);
@@ -11,6 +11,7 @@ class ShoppingCart extends React.Component{
             isOpen:false
         }
     }
+    // 通过refs调用子组件cart中的方法
     open(){
         this.refs.getChild.openCart();
         this.refs.getChild.refreshList();

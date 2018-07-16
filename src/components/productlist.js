@@ -1,4 +1,5 @@
 import React from 'react';
+//商品列表组件
 class ProductList extends React.Component{
     constructor(props){
         super(props);
@@ -10,6 +11,7 @@ class ProductList extends React.Component{
     }
     componentWillMount(){
     }
+    //组件加载完成后，通过分类名称获取分类下的商品列表
     componentDidMount(){
         var kname = this.state.kind[this.state.active];
         fetch('http://localhost:8081/php1/products.php?kind='+kname,{
@@ -26,6 +28,7 @@ class ProductList extends React.Component{
             console.log(err);
         })
     }
+    //改变分类时，重置商品数据
     changeKind(num){
         this.setState({
             active:num
@@ -44,6 +47,7 @@ class ProductList extends React.Component{
             console.log(err);
         })
     }
+    //点击添加购物车后将该商品添加到数据库，购物车表中
     addCart(pid,pname,pavatar,price){
         fetch('http://localhost:8081/php1/cart.php?proid='+pid+'&pname='+pname+'&pavatar='+pavatar+'&price='+price+'&kind=insert&count=1',{
             method:'GET',
