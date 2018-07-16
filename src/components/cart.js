@@ -105,7 +105,7 @@ class Cart extends React.Component{
             return <div className='cart-box'>
                 <div>CART</div>
                 <span onClick={()=>this.closeCart()}>×</span>
-                <span onClick={()=>this.refreshList()} className='refreash'>刷新</span>
+                <span onClick={()=>this.refreshList()} className='refreash'>refresh</span>
                 <ul>
                     {cartList}
                 </ul>
