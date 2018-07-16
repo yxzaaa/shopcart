@@ -91,7 +91,7 @@ class Cart extends React.Component{
                     <img src={item.pavatar} alt=''/>
                 </div>
                 <div className='cart-title'>{item.pname}</div>
-                <div className='cart-price'>${item.price}</div>
+                <div className='cart-price'>${(item.price*item.count).toFixed(2)}</div>
                 <div className='cart-count'>
                     <span className='down' onClick={()=>this.down(item.cid,index)}>-</span>
                     <span className='count'>{item.count}</span>
