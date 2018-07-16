@@ -29,14 +29,24 @@ class ProductList extends React.Component{
                     price:'12.99'
                 }
             ],
-            kind:0
+            kind:['cameras','accessories'],
+            active:0
         }
     }
     componentWillMount(){
     }
+    componentDidMount(){
+        var kname = this.state.kind[this.state.active];
+        fetch('localhost/php/products.php',{
+            method:'POST',
+            body:'kind='+kname
+        }).then(function(res){
+            console.log(res);
+        })
+    }
     changeKind(num){
         this.setState({
-            kind:num
+            active:num
         })
     }
     render(){
@@ -52,8 +62,8 @@ class ProductList extends React.Component{
         ))
         return <div className='pros-list'>
             <div className='pro-kind'>
-                <span className={this.state.kind === 0 && 'active'} onClick={()=>this.changeKind(0)}>cameras</span>
-                <span className={this.state.kind === 1 && 'active'} onClick={()=>this.changeKind(1)}>accessories</span>
+                <span className={this.state.active === 0 && 'active'} onClick={()=>this.changeKind(0)}>cameras</span>
+                <span className={this.state.active === 1 && 'active'} onClick={()=>this.changeKind(1)}>accessories</span>
             </div>
             <ul>
                 {list}
