@@ -1,34 +1,9 @@
 import React from 'react';
-import pan from '../assets/img/Pan.png';
-import page from '../assets/img/page.jpg';
-import dsc from '../assets/img/DSC.jpg';
-import card from '../assets/img/sd-card.jpg';
 class Cart extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            products:[
-                {
-                    src:pan,
-                    name:'Wyze cam',
-                    price:'12.99'
-                },
-                {
-                    src:page,
-                    name:'Wyze cam',
-                    price:'12.99'
-                },
-                {
-                    src:dsc,
-                    name:'Wyze cam',
-                    price:'12.99'
-                },
-                {
-                    src:card,
-                    name:'Wyze cam',
-                    price:'12.99'
-                }
-            ],
+            carts:[],
             isOpen:false
         }
     }
@@ -42,21 +17,95 @@ class Cart extends React.Component{
             isOpen:true
         })
     }
+    refreshList(){
+        fetch('http://localhost:8081/php1/cart.php?kind=select',{
+            method:'GET',
+            mode:'cors'
+        }).then((res)=>{
+            return res.json();
+        }).then((data)=>{
+            console.log(data);
+            this.setState({
+                carts:data
+            })
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+    down(cid,index){
+        var carts = this.state.carts;
+        if(carts[index].count>1){
+            carts[index].count --; 
+            fetch('http://localhost:8081/php1/cart.php?kind=update&cid='+cid+'&count='+carts[index].count,{
+                method:'GET',
+                mode:'cors'
+            }).then((res)=>{
+                return res.json();
+            }).then(()=>{
+                this.setState({
+                    carts:carts
+                })
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }
+    }
+    up(cid,index){
+        var carts = this.state.carts;
+        carts[index].count ++; 
+        fetch('http://localhost:8081/php1/cart.php?kind=update&cid='+cid+'&count='+carts[index].count,{
+            method:'GET',
+            mode:'cors'
+        }).then((res)=>{
+            return res.json();
+        }).then(()=>{
+            this.setState({
+                carts:carts
+            })
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+    delete(cid){
+        fetch('http://localhost:8081/php1/cart.php?kind=delete&cid='+cid,{
+            method:'GET',
+            mode:'cors'
+        }).then((res)=>{
+            return res.json();
+        }).then(()=>{
+            this.refreshList();
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+    yes(){
+        alert("buy success!");
+    }
+    componentDidMount(){
+        this.refreshList();
+    }
     render(){
-        var cartList = this.state.products.map((item,index)=>(
+        var cartList = this.state.carts.map((item,index)=>(
             <li className='pro-box' key={index}>
                 <div className='cart-img'>
-                    <img src={item.src} alt=''/>
+                    <img src={item.pavatar} alt=''/>
                 </div>
-                <div className='cart-title'>{item.name}</div>
+                <div className='cart-title'>{item.pname}</div>
                 <div className='cart-price'>${item.price}</div>
-                <div className='go-buy'>BUY</div>
+                <div className='cart-count'>
+                    <span className='down' onClick={()=>this.down(item.cid,index)}>-</span>
+                    <span className='count'>{item.count}</span>
+                    <span className='up' onClick={()=>this.up(item.cid,index)}>+</span>
+                </div>
+                <div className='go-buy' onClick={()=>this.yes()}>BUY</div>
+                <div className='remove' onClick={()=>this.delete(item.cid)}>DELETE</div>
             </li>
         ))
         if(this.state.isOpen === true){
             return <div className='cart-box'>
                 <div>CART</div>
                 <span onClick={()=>this.closeCart()}>×</span>
+                <span onClick={()=>this.refreshList()} className='refreash'>刷新</span>
                 <ul>
                     {cartList}
                 </ul>

@@ -1,6 +1,9 @@
 <?php
     include "./init.php";
-    @$pid = $_REQUEST["pid"];
+    @$pname = $_REQUEST["pname"];
+    @$pavatar = $_REQUEST["pavatar"];
+    @$price = $_REQUEST["price"];
+    @$proid = $_REQUEST["proid"];
     @$count = $_REQUEST["count"];
     @$cid = $_REQUEST["cid"];
     @$kind = $_REQUEST["kind"];
@@ -27,7 +30,7 @@
             $response['resMsg'] = '修改失败';
         }
     }else if ($kind == "insert"){
-        $sql = "INSERT INTO cart VALUES (null,'$pid','$count')";
+        $sql = "INSERT INTO cart VALUES (null,'$proid','$pname','$pavatar','$price','$count')";
         mysqli_query($connect,$sql);
         $row = mysqli_affected_rows($connect);
         $response = [

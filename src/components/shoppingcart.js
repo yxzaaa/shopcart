@@ -13,11 +13,12 @@ class ShoppingCart extends React.Component{
     }
     open(){
         this.refs.getChild.openCart();
+        this.refs.getChild.refreshList();
     }
     render(){
         return <div className='shopcart-box'>
             <div className='cart-icon' onClick={()=>this.open()}>
-                <img src={cartIcon} alt=''/>
+                <img src={cartIcon} alt='1'/>
             </div>
             <Banner />
             <ProductList />

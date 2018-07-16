@@ -1,9 +1,13 @@
 set names utf8;
+drop database if exists shopcart;
 create database shopcart charset=utf8;
 use shopcart;
 create table cart(
     cid int primary key auto_increment,
-    proid int nut null,
+    proid int not null,
+    pname varchar(64) not null,
+    pavatar varchar(256) not null,
+    price decimal(30,2) not null,
     count int not null
 );
 create table kind(
@@ -18,10 +22,10 @@ create table products(
     kindid int not null,
     pname varchar(64) not null,
     pavatar varchar(256) not null,
-    price decimal(100,2) not null
+    price decimal(30,2) not null
 );
 insert into products values
-    (null,1,"Wyze cam","../assets/img/Pan.png",12.99),
-    (null,1,"Wyze cam","../assets/img/Pan.png",12.99),
-    (null,2,"Wyze cam","../assets/img/Pan.png",12.99),
-    (null,2,"Wyze cam","../assets/img/Pan.png",12.99);
+    (null,1,"Wyze cam","http://localhost:8081/shopcart/src/assets/img/Pan.png",12.99),
+    (null,1,"Wyze cam","http://localhost:8081/shopcart/src/assets/img/page.jpg",12.99),
+    (null,2,"Wyze cam","http://localhost:8081/shopcart/src/assets/img/DSC.jpg",12.99),
+    (null,2,"Wyze cam","http://localhost:8081/shopcart/src/assets/img/sd-card.jpg",12.99);
