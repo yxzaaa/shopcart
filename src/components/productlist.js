@@ -14,7 +14,7 @@ class ProductList extends React.Component{
     //组件加载完成后，通过分类名称获取分类下的商品列表
     componentDidMount(){
         var kname = this.state.kind[this.state.active];
-        fetch('http://localhost:8081/php1/products.php?kind='+kname,{
+        fetch('http://localhost:8081/product?kind='+kname,{
             method:'GET',
             mode:'cors'
         }).then((res)=>{
@@ -34,7 +34,7 @@ class ProductList extends React.Component{
             active:num
         })
         var kname = this.state.kind[num];
-        fetch('http://localhost:8081/php1/products.php?kind='+kname,{
+        fetch('http://localhost:8081/product?kind='+kname,{
             method:'GET',
             mode:'cors'
         }).then((res)=>{
@@ -49,7 +49,7 @@ class ProductList extends React.Component{
     }
     //点击添加购物车后将该商品添加到数据库，购物车表中
     addCart(pid,pname,pavatar,price){
-        fetch('http://localhost:8081/php1/cart.php?proid='+pid+'&pname='+pname+'&pavatar='+pavatar+'&price='+price+'&kind=insert&count=1',{
+        fetch('http://localhost:8081/cart?proid='+pid+'&pname='+pname+'&pavatar='+pavatar+'&price='+price+'&kind=insert&count=1',{
             method:'GET',
             mode:'cors'
         }).then((res)=>{
@@ -77,8 +77,8 @@ class ProductList extends React.Component{
         ))
         return <div className='pros-list'>
             <div className='pro-kind'>
-                <span className={this.state.active === 0 && 'active'} onClick={()=>this.changeKind(0)}>CAMERAS</span>
-                <span className={this.state.active === 1 && 'active'} onClick={()=>this.changeKind(1)}>ACCESSORIES</span>
+                <span className={this.state.active === 0?'active':''} onClick={()=>this.changeKind(0)}>CAMERAS</span>
+                <span className={this.state.active === 1?'active':''} onClick={()=>this.changeKind(1)}>ACCESSORIES</span>
             </div>
             <ul>
                 {list}

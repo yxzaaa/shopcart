@@ -24,7 +24,7 @@ class Cart extends React.Component{
     }
     //刷新购物车数据
     refreshList(){
-        fetch('http://localhost:8081/php1/cart.php?kind=select',{
+        fetch('http://localhost:8081/cart?kind=select',{
             method:'GET',
             mode:'cors'
         }).then((res)=>{
@@ -43,7 +43,7 @@ class Cart extends React.Component{
         var carts = this.state.carts;
         if(carts[index].count>1){
             carts[index].count --; 
-            fetch('http://localhost:8081/php1/cart.php?kind=update&cid='+cid+'&count='+carts[index].count,{
+            fetch('http://localhost:8081/cart?kind=update&cid='+cid+'&count='+carts[index].count,{
                 method:'GET',
                 mode:'cors'
             }).then((res)=>{
@@ -61,7 +61,7 @@ class Cart extends React.Component{
     up(cid,index){
         var carts = this.state.carts;
         carts[index].count ++; 
-        fetch('http://localhost:8081/php1/cart.php?kind=update&cid='+cid+'&count='+carts[index].count,{
+        fetch('http://localhost:8081/cart?kind=update&cid='+cid+'&count='+carts[index].count,{
             method:'GET',
             mode:'cors'
         }).then((res)=>{
@@ -76,7 +76,7 @@ class Cart extends React.Component{
     }
     //删除购物车中指定商品
     delete(cid){
-        fetch('http://localhost:8081/php1/cart.php?kind=delete&cid='+cid,{
+        fetch('http://localhost:8081/cart?kind=delete&cid='+cid,{
             method:'GET',
             mode:'cors'
         }).then((res)=>{

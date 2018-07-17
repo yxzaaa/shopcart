@@ -25,7 +25,7 @@ create table products(
     price decimal(30,2) not null
 );
 insert into products values
-    (null,1,"Wyze Cam Pan","http://localhost:8081/shopcart/src/assets/img/Pan.png",29.99),
-    (null,1,"Wyze Cam v2","http://localhost:8081/shopcart/src/assets/img/page.jpg",19.99),
-    (null,2,"Wyze Cam Mounting Kit","http://localhost:8081/shopcart/src/assets/img/DSC.jpg",3.99),
-    (null,2,"Wyze 32GB MicroSDHC Card","http://localhost:8081/shopcart/src/assets/img/sd-card.jpg",9.99);
+    (null,1,"Wyze Cam Pan","http://localhost:8081/img/Pan.png",29.99),
+    (null,1,"Wyze Cam v2","http://localhost:8081/img/page.jpg",19.99),
+    (null,2,"Wyze Cam Mounting Kit","http://localhost:8081/img/DSC.jpg",3.99),
+    (null,2,"Wyze 32GB MicroSDHC Card","http://localhost:8081/img/sd-card.jpg",9.99);
